@@ -1694,7 +1694,7 @@
 			pinctrl-names = "default";
 
 			arduino-i2c@8 {
-				compatible = "arduino, arduino-uno-i2c";
+				compatible = "arduino,arduino-uno-i2c";
 				status = "okay";
 				reg = <0x08>;
 			};
@@ -2414,20 +2414,20 @@
 	chosen {
 		rpi-country-code = <0x04>;
 		bootargs = "coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_compat_alsa=0 snd_bcm2835.enable_hdmi=1 bcm2708_fb.fbwidth=0 bcm2708_fb.fbheight=0 bcm2708_fb.fbswap=1 smsc95xx.macaddr=DC:A6:32:F1:D2:F7 vc_mem.mem_base=0x3ec00000 vc_mem.mem_size=0x40000000  console=ttyS0,115200 dwc_otg.lpm_enable=0 console=tty1 root=LABEL=writable rootfstype=ext4 rootwait fixrtc quiet splash";
-		linux,initrd-start = <0x2ce01000>;
+		linux,initrd-start = <0x2cd9d000>;
 		rpi-boardrev-ext = <0x04>;
 		log = <0x3ff80000 0x7ffe0>;
-		linux,initrd-end = <0x2efff1d8>;
+		linux,initrd-end = <0x2efff633>;
 		os_prefix;
 		overlay_prefix = [6f 76 65 72 6c 61 79 73 2f];
-		kaslr-seed = <0x192c44cb 0xa1b9d4d8>;
+		kaslr-seed = <0xf72a9db1 0x5b3e38a2>;
 
 		bootloader {
 			version = "c2f8c388c4ee37ad709ace403467d163e8dd91ce";
 			capabilities = <0x1f>;
 			boot-mode = <0x01>;
 			partition = <0x00>;
-			rsts = <0x20>;
+			rsts = <0x1020>;
 			build-timestamp = <0x608adaad>;
 			tryboot = <0x00>;
 			update-timestamp = <0x61f35fcf>;

@@ -11,7 +11,7 @@
     #address-cells = <0x01>;
     #size-cells = <0x00>;
     arduino-i2c@8 {
-        compatible = "arduino, arduino-uno-i2c";
+        compatible = "arduino-i2c";
         reg = <0x8>;
         status = "okay";
     };

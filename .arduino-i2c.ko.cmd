@@ -1,0 +1,1 @@
+cmd_/home/pi/modI2c/arduino-i2c.ko := ld -r -EL -z noexecstack --build-id=sha1  -T scripts/module.lds -o /home/pi/modI2c/arduino-i2c.ko /home/pi/modI2c/arduino-i2c.o /home/pi/modI2c/arduino-i2c.mod.o;  true

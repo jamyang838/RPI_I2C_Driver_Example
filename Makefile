@@ -3,7 +3,7 @@ KVERSION := $(shell uname -r)
 KERNEL_DIR := /lib/modules/$(shell uname -r)/build
 
 MODULE_NAME = arduino-i2c#{arduino-i2c, arduino-spi, arduino-platform}
-obj-m := $(MODULE_NAME).o
+obj-m += $(MODULE_NAME).o
 
 all:
 	make -C $(KERNEL_DIR) M=$(PWD) modules
