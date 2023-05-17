@@ -2,7 +2,6 @@
 #include <linux/i2c.h>
 #include <linux/fs.h>
 #include <linux/cdev.h>
-// #include <linux/kernel.h>
 
 #define ARDUINO_DEV_NAME KBUILD_MODNAME
 static struct class *arduino_class;

@@ -1,12 +1,6 @@
 /dts-v1/;
 /plugin/;
 
-/*
-/{
-    compatible = "brcm, bcm2835";
-}
-*/
-
 &i2c1 {
     #address-cells = <0x01>;
     #size-cells = <0x00>;
