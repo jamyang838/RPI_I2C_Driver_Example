@@ -1,0 +1,6 @@
+arduino-i2c.dts     附加裝置
+devicetree.dts      RPI加入android-i2c.dts後的devicetree
+arduino-i2c.c       驅動程式code
+Makefile            編譯devicetree.dts與arduino-i2c.c
+./app/              利用驅動程式arduino-i2c產生的/dev/i2c-arduino 製作的app,傳送"test"到arduino(i2c slave)
+./app_2/            利用原生驅動的/dev/i2c1製作的app,傳送"test"到arduino(i2c slave)
