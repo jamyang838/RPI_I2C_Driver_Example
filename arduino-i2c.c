@@ -14,6 +14,10 @@ struct arduino_i2c_cdev
     struct cdev cdev;
 };
 
+
+//***********************************************************************
+//*                                 OPEN
+//***********************************************************************
 static int arduino_i2c_open(struct inode *inode, struct file *filp)
 {
     struct arduino_i2c_cdev *arduino =
@@ -22,6 +26,9 @@ static int arduino_i2c_open(struct inode *inode, struct file *filp)
     return 0;
 };
 
+//***********************************************************************
+//*                                 WRITE
+//***********************************************************************
 static ssize_t arduino_i2c_write(struct file *filp, const char __user *buf, size_t count, loff_t *offset)
 {
     char *tmp;
@@ -43,17 +50,38 @@ static ssize_t arduino_i2c_write(struct file *filp, const char __user *buf, size
     kfree(tmp);
     return nbyte;
 };
+//***********************************************************************
+//*                                 READ
+//***********************************************************************
+static ssize_t arduino_i2c_read(struct file *filp, char __user *buf, size_t count,
+		loff_t *offset)
+{
+    int err = 0;
+    int nbyte = 0;
+    int i = 0;
+    struct i2c_client *client = filp->private_data;
+    count = count > 8192 ? 8192 : count;        
+    err = i2c_smbus_read_i2c_block_data(client, 0x32, count, buf);
+    printk("arduino read! uno %d", err);
+    return 0;
+}	
 
+//***********************************************************************
+//*                                 file_operations
+//***********************************************************************
 struct file_operations arduino_i2c_fops = {
     .open = arduino_i2c_open,
-    .write = arduino_i2c_write};
+    .write = arduino_i2c_write,
+    .read = arduino_i2c_read,
+    };
 
 static int arduino_i2c_probe(struct i2c_client *client)
-{
+{    
     int err = 0;
     struct device *dev = &client->dev;
     struct arduino_i2c_cdev *arduino;
 
+    printk("arduino probe! pk");
     arduino = devm_kzalloc(dev, sizeof(struct arduino_i2c_cdev), GFP_KERNEL);
     if (IS_ERR(arduino))
     {

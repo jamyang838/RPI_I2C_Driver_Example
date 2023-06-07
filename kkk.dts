@@ -1694,7 +1694,7 @@
 			pinctrl-names = "default";
 
 			arduino-i2c@8 {
-				compatible = "arduino,arduino-uno-i2c";
+				compatible = "arduino-i2c";
 				status = "okay";
 				reg = <0x08>;
 			};
@@ -2420,14 +2420,14 @@
 		linux,initrd-end = <0x2efff633>;
 		os_prefix;
 		overlay_prefix = [6f 76 65 72 6c 61 79 73 2f];
-		kaslr-seed = <0xf72a9db1 0x5b3e38a2>;
+		kaslr-seed = <0x98409271 0x8bc1845d>;
 
 		bootloader {
 			version = "c2f8c388c4ee37ad709ace403467d163e8dd91ce";
 			capabilities = <0x1f>;
 			boot-mode = <0x01>;
 			partition = <0x00>;
-			rsts = <0x1020>;
+			rsts = <0x1000>;
 			build-timestamp = <0x608adaad>;
 			tryboot = <0x00>;
 			update-timestamp = <0x61f35fcf>;
