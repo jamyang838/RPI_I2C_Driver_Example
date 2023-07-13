@@ -9,7 +9,10 @@
 
 int main( void )
 {
-    char *buf = "test 123\n";
+    // char buf[10] = "$510;\r";
+    char buf[10];
+    strcpy(buf, "$510;\r");      
+    // char *buf = "$510;\r";
     void *buf_read;    
     int fd;
     int len;
@@ -20,7 +23,7 @@ int main( void )
         printf("I2C fail");
     }    
     printf("fd = %d\n", fd);
-    len = write(fd, buf, strlen(buf));  
+    len = write(fd, buf, 10);  
     printf("legnth of transmittion = %d\n", len);    
     close(fd);
     return 0;

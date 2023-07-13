@@ -34,7 +34,6 @@ static ssize_t arduino_i2c_write(struct file *filp, const char __user *buf, size
     char *tmp;
     int err = 0;
     int nbyte = 0;
-    int i = 0;
     struct i2c_client *client = filp->private_data;
     count = count > 8192 ? 8192 : count;
     tmp = memdup_user(buf, count);
@@ -42,11 +41,8 @@ static ssize_t arduino_i2c_write(struct file *filp, const char __user *buf, size
     {
         return PTR_ERR(tmp);
     }
-    for (i = 0; i < count; i++)
-    {
-        err = i2c_smbus_write_byte(client, tmp[i]);
-        nbyte += err ? 0 : 1;
-    }
+
+    err = i2c_smbus_write_block_data(client, 0x64, count, tmp);   
     kfree(tmp);
     return nbyte;
 };
@@ -54,17 +50,15 @@ static ssize_t arduino_i2c_write(struct file *filp, const char __user *buf, size
 //*                                 READ
 //***********************************************************************
 static ssize_t arduino_i2c_read(struct file *filp, char __user *buf, size_t count,
-		loff_t *offset)
+                                loff_t *offset)
 {
     int err = 0;
-    int nbyte = 0;
-    int i = 0;
     struct i2c_client *client = filp->private_data;
-    count = count > 8192 ? 8192 : count;        
-    err = i2c_smbus_read_i2c_block_data(client, 0x32, count, buf);
+    count = count > 8192 ? 8192 : count;
+    err = i2c_smbus_read_i2c_block_data(client, 0x32, count, buf);    
     printk("arduino read! uno %d", err);
     return 0;
-}	
+}
 
 //***********************************************************************
 //*                                 file_operations
@@ -73,10 +67,10 @@ struct file_operations arduino_i2c_fops = {
     .open = arduino_i2c_open,
     .write = arduino_i2c_write,
     .read = arduino_i2c_read,
-    };
+};
 
 static int arduino_i2c_probe(struct i2c_client *client)
-{    
+{
     int err = 0;
     struct device *dev = &client->dev;
     struct arduino_i2c_cdev *arduino;
